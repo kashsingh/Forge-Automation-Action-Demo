@@ -1,0 +1,54 @@
+modules:
+  automation:actionProvider:
+    - key: automation-actions-provider
+      actions:
+        - create-group-action
+  action:
+    - key: create-group-action
+      name: Create group
+      function: create-group-function
+      description: Creates a new Atlassian group
+      config:
+        resource: main-resource
+        render: native
+      inputs:
+        groupName:
+          title: Group name
+          type: string
+          description: The name of the group to create
+          required: true
+        description:
+          title: Group description
+          type: string
+          description: The description of the group to create
+          required: false
+      actionVerb: CREATE
+      outputs:
+        groupId:
+          description: The ID of the group that was created
+          type: string
+          nullable: false
+      outputContext:
+        entityName: group
+        outputType: OBJECT
+        outputDomain: jira
+  function:
+    - key: automation-resolver
+      handler: index.handler
+    - key: create-group-function
+      handler: index.createGroup
+app:
+  runtime:
+    name: nodejs22.x
+    memoryMB: 128
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/8839f046-1e74-4e06-9d90-e83f764ffe27
+resources:
+  - key: main-resource
+    path: src/frontend/index.jsx
+permissions:
+  external:
+    fetch:
+      backend:
+        - address: api.atlassian.com
+  scopes: []
