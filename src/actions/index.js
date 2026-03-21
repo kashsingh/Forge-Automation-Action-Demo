@@ -48,6 +48,7 @@ export async function createGroup(payload) {
     if (response.ok) {
       const body = await response.json().catch(() => ({}));
       console.log(`Created group '${groupName}'`, body);
+      return {groupId: body.id}
     } else {
       const body = await response.json().catch(() => ({}));
       console.log(
