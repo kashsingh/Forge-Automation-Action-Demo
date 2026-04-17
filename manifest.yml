@@ -3,6 +3,7 @@ modules:
     - key: automation-actions-provider
       actions:
         - create-group-action
+        - add-users-to-group-action
   action:
     - key: create-group-action
       name: Create group
@@ -32,11 +33,34 @@ modules:
         entityName: group
         outputType: OBJECT
         outputDomain: jira
+    - key: add-users-to-group-action
+      name: Add users to group
+      function: add-users-group
+      description: Adds selected users to an Atlassian group
+      config:
+        resource: main-resource
+        render: native
+      inputs:
+        userAccountIds:
+          title: Users
+          type: string
+          description: The account IDs of users to add to the group
+          required: true
+        groupId:
+          title: Group
+          type: string
+          description: The ID of the group to add users to
+          required: true
+      actionVerb: UPDATE
+      resolver:
+        function: automation-resolver
   function:
     - key: automation-resolver
       handler: index.handler
     - key: create-group-function
       handler: index.createGroup
+    - key: add-users-group
+      handler: index.addUsersToGroup
 app:
   runtime:
     name: nodejs22.x
