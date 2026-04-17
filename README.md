@@ -40,6 +40,12 @@ forge variables set --encrypt --environment development DIRECTORY_ID "<your-dire
 - Modify your app actions by editing the `src/actions/index.js` file.
 - Modify your app backend by editing the `src/resolvers/index.js` file to define resolver functions. See [Forge resolvers](https://developer.atlassian.com/platform/forge/runtime-reference/custom-ui-resolver/) for documentation on resolver functions.
 
+- Install all packages and dependencies by running"
+
+```sh
+npm install
+```
+
 - Build and deploy your app by running:
 
 ```sh
