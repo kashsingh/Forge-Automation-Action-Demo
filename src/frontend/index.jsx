@@ -111,9 +111,9 @@ const AddUsersToGroupForm = ({ context, isValidating }) => {
             {...groupRegisterProps}
             defaultValue={context.extension.data.inputs.groupId || ""}
             placeholder="Enter group ID"
-            onChange={(value) => {
-              groupOnChange(value);
-              onChange({ groupId: value });
+            onChange={(e) => {
+              groupOnChange(e);
+              onChange({ groupId: e.target.value });
             }}
           />
           {formState.errors.groupId?.message && (
